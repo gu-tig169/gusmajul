@@ -16,8 +16,10 @@ import 'package:provider/provider.dart';
  
   Widget _listItem(context, task) {
     return Card(
+      color: Colors.purple[50],
           child: CheckboxListTile(
           controlAffinity: ListTileControlAffinity.leading,
+          activeColor: Colors.purple[200],
           title: Text(task.toDoMessage, 
             style: TextStyle(
               decoration: (task.completed 
@@ -27,7 +29,7 @@ import 'package:provider/provider.dart';
           ),
           value: task.completed,
           onChanged: (bool checked) {
-            Provider.of<MyState>(context, listen: false).changeCheckboxValue(task);
+            Provider.of<MyState>(context, listen: false).getCheckboxValue(task);
           }, //Ändrar värdet på checkbox
           secondary: IconButton(icon: Icon(Icons.clear),
           onPressed: () {

@@ -3,9 +3,8 @@ import 'package:flutter/cupertino.dart';
 class Task {
   String toDoMessage;
   bool completed;
-  bool todoToggle;
 
-  Task({this.toDoMessage, this.completed = false, this.todoToggle}) : super();
+  Task({this.toDoMessage, this.completed = false});
 
   void checkboxValue() {
     completed = !completed;
@@ -26,7 +25,7 @@ class MyState extends ChangeNotifier{
     notifyListeners();
   } //Ta bort task
 
-  void changeCheckboxValue(Task task){
+  void getCheckboxValue(Task task){
     final taskIndex = _tasks.indexOf(task);
     _tasks[taskIndex].checkboxValue();
     notifyListeners();
@@ -34,9 +33,9 @@ class MyState extends ChangeNotifier{
 
   List<Task> filterOptions(String filter){
     if (filter == 'Completed') {
-      return _tasks.where((task) => task.completed == true).toList();
+      return _tasks.where((task) => task.completed).toList();
     } else if (filter == 'Incompleted') {
-      return _tasks.where((task) => task.completed == false).toList();
+      return _tasks.where((task) => !task.completed).toList();
     }
     return _tasks;
   } //Om filtreringen är 'Completed' visas bara de tasks som har värdet completed

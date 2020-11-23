@@ -12,8 +12,8 @@ class ToDoListView extends StatefulWidget {
 
 class _ToDoListViewState extends State<ToDoListView>{
 
-  List<String> filters = ['All Tasks', 'Completed', 'Incompleted'];
-  String values = 'All Tasks';
+  List<String> filterBy = ['All Tasks', 'Completed', 'Incompleted'];
+  String filterValue = 'All Tasks';
   
   @override 
   Widget build(BuildContext context) {
@@ -22,12 +22,14 @@ class _ToDoListViewState extends State<ToDoListView>{
       backgroundColor: Colors.purple[200],
       centerTitle: true,
       title: Text('To Do List', style: TextStyle(fontSize: 24)),
-      actions: [_dropDownButton(),],
+      actions: [
+        _dropDownButton(),
+      ],
     ),
       body: Consumer<MyState>(
         builder: (context, state, child) => ToDoList(
-          state.filterOptions(values)
-        ), //Bodyn är mina listItems 
+          state.filterOptions(filterValue)
+        ), //Bodyn har 'All Tasks' som utgångspunkt 
       ),
       floatingActionButton: _floatingActionButton(),
     );
@@ -35,13 +37,12 @@ class _ToDoListViewState extends State<ToDoListView>{
 
   Widget _dropDownButton(){
     return DropdownButton(
-      value: values,
       onChanged: (newValue) {
         setState(() {
-          values = newValue;
+          filterValue = newValue;
         });
       },
-      items: filters.map((filter) {
+      items: filterBy.map((filter) {
         return DropdownMenuItem<String> (
           value: filter,
           child: Text(filter),
@@ -54,6 +55,7 @@ class _ToDoListViewState extends State<ToDoListView>{
       ),
     );
   }
+  
 
   Widget _floatingActionButton(){
     return FloatingActionButton(
@@ -66,9 +68,7 @@ class _ToDoListViewState extends State<ToDoListView>{
               toDoMessage: 'Task',))));
             if (newTask != null) {
               Provider.of<MyState>(context, listen: false).addItem(newTask);
-            } else {
-              return Text('Oops');
-            }
+            } 
       },
     );
   }
