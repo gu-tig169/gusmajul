@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   var state = MyState();
+  state.getTaskList();
 
   runApp(
     ChangeNotifierProvider(
@@ -22,4 +23,4 @@ class MyApp extends StatelessWidget {
       home: ToDoListView(),
     );
   }
-} //Min dropdown meny som ännu inte fyller någon funktion men som visar alternativ på hur man kan filtrera listan
+}
