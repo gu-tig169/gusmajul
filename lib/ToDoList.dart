@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'Fetch.dart';
 import 'model.dart';
 import 'package:provider/provider.dart';
 
 class ToDoList extends StatelessWidget {
+
   final List<Task> tasks;
+
   ToDoList(this.tasks);
 
   Widget build(BuildContext context) {
@@ -29,17 +30,15 @@ Widget _listItem(context, Task task) {
         ),
       ),
       value: task.completed,
-      onChanged: (bool checked) async {
-        await updateTask(task.id, task.toDoMessage, checked);
+      onChanged: (bool checked) {
         Provider.of<MyState>(context, listen: false)
             .getCheckboxValue(task);
       },
       secondary: IconButton(
         icon: Icon(Icons.clear),
-        onPressed: () async {
-          await deleteTask(task.id);
-          var state = Provider.of<MyState>(context, listen: false);
-          state.removeItem(task);
+        onPressed: () {
+          Provider.of<MyState>(context, listen: false)
+            .removeItem(task);
         },
       ),
     ),

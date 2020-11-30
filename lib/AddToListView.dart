@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Fetch.dart';
 import 'package:to_do_list/model.dart';
 import './model.dart';
 
@@ -76,8 +75,8 @@ class _AddToListViewState extends State<AddToListView> {
               });
             }
             else if (inputController.text.isNotEmpty) {
-              final task = await createTask(inputController.text, false);
-              Navigator.pop(context, task);
+              //final task = await createTask(inputController.text, false);
+              Navigator.pop(context, Task(toDoMessage: toDoMessage, completed: false));
             }
           },
           color: Colors.purple[100],

@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'AddToListView.dart';
-import 'Fetch.dart';
 import 'ToDoList.dart';
 import 'model.dart';
 
@@ -15,21 +12,6 @@ class ToDoListView extends StatefulWidget {
 class _ToDoListViewState extends State<ToDoListView> {
   List<String> filterBy = ['All Tasks', 'Completed', 'Incompleted'];
   String filterValue = 'All Tasks';
-  String task = 'task';
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchTasks();
-  }
-
-  _fetchTasks() async {
-    final tasks = await fetchTasks();
-    final provider = Provider.of<MyState>(context, listen: false);
-    for (final task in tasks) {
-      provider.addItem(task);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
