@@ -16,8 +16,9 @@ class _ToDoListViewState extends State<ToDoListView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.purple[200],
+        backgroundColor: Colors.black,
         centerTitle: true,
         title: Text('To Do List', style: TextStyle(fontSize: 24)),
         actions: [
@@ -52,7 +53,7 @@ class _ToDoListViewState extends State<ToDoListView> {
   Widget _floatingActionButton() {
     return FloatingActionButton(
       child: Icon(Icons.add),
-      backgroundColor: Colors.purple[200],
+      backgroundColor: Colors.orange[300],
       onPressed: () async {
         var newTask = await Navigator.push(
             context,

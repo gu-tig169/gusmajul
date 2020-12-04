@@ -7,8 +7,6 @@ class AddToListView extends StatefulWidget {
 
   AddToListView(this.task);
 
-  //Behövs konstruktor? 18:20 i filmen
-
   @override
   _AddToListViewState createState() => _AddToListViewState(task);
 }
@@ -31,15 +29,16 @@ class _AddToListViewState extends State<AddToListView> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.purple[200],
+        backgroundColor: Colors.black,
         centerTitle: true,
         title: Text("Add To Do's", style: TextStyle(fontSize: 24)),
       ),
       body: Center(
         child: Column(
           children: [
-            Container(height: 30),
+            Container(height: 150),
             _userInput(),
             Container(height: 30),
             _addTask(),
@@ -51,12 +50,16 @@ class _AddToListViewState extends State<AddToListView> {
 
   Widget _userInput() {
     return Container(
-      width: 300,
+      width: 360,
+      decoration: boxDecoration(),
       child: TextField(
+        style: TextStyle(color: Colors.white),
         controller: inputController,
         textAlign: TextAlign.center,
         decoration: InputDecoration(
+          border: InputBorder.none,
           hintText: 'What are you going to do?',
+          hintStyle: TextStyle(color: Colors.white54),
           errorText:
               _validate ? 'You must write something to get shit done!' : null,
         ),
@@ -64,22 +67,32 @@ class _AddToListViewState extends State<AddToListView> {
     );
   }
 
+  BoxDecoration boxDecoration() {
+    return BoxDecoration(
+      border: Border.all(
+        color: Colors.orange[300],
+        width: 2,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(15)),
+    );
+  }
+
   Widget _addTask() {
     return Column(
       children: [
         FlatButton(
+          minWidth: 150,
           onPressed: () async {
             if (inputController.text.isEmpty) {
               setState(() {
                 _validate = true;
               });
-            }
-            else if (inputController.text.isNotEmpty) {
-              //final task = await createTask(inputController.text, false);
-              Navigator.pop(context, Task(toDoMessage: toDoMessage, completed: false));
+            } else if (inputController.text.isNotEmpty) {
+              Navigator.pop(
+                  context, Task(toDoMessage: toDoMessage, completed: false));
             }
           },
-          color: Colors.purple[100],
+          color: Colors.orange[300],
           child: Text('+ ADD', style: TextStyle(fontSize: 16)),
         ),
       ],
