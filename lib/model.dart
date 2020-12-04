@@ -4,7 +4,7 @@ import 'package:to_do_list/fetch.dart';
 class Task {
   String id;
   String toDoMessage;
-  bool completed = false;
+  bool completed;
 
   Task({this.id, this.toDoMessage, this.completed = false});
 
@@ -62,6 +62,6 @@ class MyState extends ChangeNotifier {
     } else if (filter == 'Incompleted') {
       return _tasks.where((task) => !task.completed).toList();
     }
-    return tasks;
+    return _tasks;
   }
 }
